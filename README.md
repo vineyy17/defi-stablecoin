@@ -1,66 +1,81 @@
-## Foundry
+# Decentralized Stablecoin System
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+A robust, algorithmic stablecoin implementation built on Ethereum.
 
-Foundry consists of:
+## Description
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+This project implements a decentralized, exogenously collateralized stablecoin system using Solidity. The stablecoin is pegged to USD (1 token = $1) and is backed by WETH and WBTC as collateral. The system uses an algorithmic stability mechanism and includes a liquidation system to maintain over-collateralization.
 
-## Documentation
+## Key Features
 
-https://book.getfoundry.sh/
+- USD-pegged stablecoin
+- Collateralized by ETH and BTC
+- No governance or fees
+- Algorithmic stability
+- Liquidation mechanism
+
+## Smart Contracts
+
+1. `DecentralizedStableCoin.sol`: ERC20 token with minting and burning capabilities.
+2. `DSCEngine.sol`: Core logic for collateral management, minting, redeeming, and liquidations.
+
+## Prerequisites
+
+- [Foundry](https://book.getfoundry.sh/getting-started/installation)
+- Make
+
+## Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/vineyy17/defi-stablecoin.git
+   cd decentralized-stablecoin
+   ```
+
+2. Install dependencies:
+   ```bash
+   make install
+   ```
 
 ## Usage
 
 ### Build
 
-```shell
-$ forge build
+```bash
+make build
 ```
 
 ### Test
 
-```shell
-$ forge test
-```
-
-### Format
-
-```shell
-$ forge fmt
-```
-
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
+```bash
+make test
 ```
 
 ### Deploy
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
+To deploy on local Anvil chain:
+```bash
+make deploy
 ```
 
-### Cast
-
-```shell
-$ cast <subcommand>
+To deploy on Sepolia testnet:
+```bash
+make deploy ARGS="--network sepolia"
 ```
 
-### Help
+Note: Make sure to set up your `.env` file with the required environment variables (SEPOLIA_RPC_URL, PRIVATE_KEY, ETHERSCAN_API_KEY) for testnet deployment.
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+### Other Commands
+
+- Format code: `make format`
+- Generate coverage report: `make coverage`
+- Take a snapshot: `make snapshot`
+- Start local Anvil chain: `make anvil`
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
